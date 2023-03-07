@@ -1,14 +1,18 @@
-import http from "http";
+import LinkedList from "./LinkedList";
 
-export const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end(
-    JSON.stringify({
-      data: "It Works!",
-    })
-  );
-});
+const linkedList = new LinkedList(1);
+linkedList.addLast(2);
+linkedList.addLast(3);
+linkedList.addLast(4);
+linkedList.addLast(5);
+linkedList.addLast(6);
+linkedList.addLast(7);
+linkedList.deleteFirst();
 
-server.listen(3000, () => {
-  console.log("Server running on http://localhost:3000/");
-});
+linkedList.reverse();
+
+console.log("SIZE: ", linkedList.size());
+console.log(linkedList.printAllNodes());
+console.log(linkedList.toArray());
+
+console.log(linkedList.getKthNodeFromEnd(1));
