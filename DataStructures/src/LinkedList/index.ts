@@ -25,14 +25,14 @@ class ListNode<T> {
 }
 
 export default class LinkedList<T> {
-  private first: ListNode<T> | null = null;
-  private last: ListNode<T> | null = null;
+  private head: ListNode<T> | null = null;
+  private tail: ListNode<T> | null = null;
   private listSize: number = 0;
 
   constructor(value: T) {
     const newNode = new ListNode(value);
-    this.first = newNode;
-    this.last = this.first;
+    this.head = newNode;
+    this.tail = this.head;
     this.listSize = 1;
   }
 
@@ -40,11 +40,11 @@ export default class LinkedList<T> {
     const newNode = new ListNode(value);
 
     if (!this.listSize) {
-      this.first = newNode;
-      this.last = newNode;
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      if (this.last) this.last.setNext = newNode;
-      this.last = newNode;
+      if (this.tail) this.tail.setNext = newNode;
+      this.tail = newNode;
       this.listSize++;
     }
   }
@@ -53,11 +53,11 @@ export default class LinkedList<T> {
     const newNode = new ListNode(value);
 
     if (!this.listSize) {
-      this.first = newNode;
-      this.last = newNode;
+      this.head = newNode;
+      this.tail = newNode;
     } else {
-      newNode.setNext = this.first;
-      this.first = newNode;
+      newNode.setNext = this.head;
+      this.head = newNode;
       this.listSize++;
     }
   }
@@ -68,13 +68,13 @@ export default class LinkedList<T> {
     }
 
     if (this.listSize === 1) {
-      this.first = null;
-      this.last = null;
+      this.head = null;
+      this.tail = null;
       this.listSize = 0;
-    } else if (this.first?.getNext) {
-      const second = this.first.getNext;
-      this.first.setNext = null;
-      this.first = second;
+    } else if (this.head?.getNext) {
+      const second = this.head.getNext;
+      this.head.setNext = null;
+      this.head = second;
       this.listSize--;
     }
   }
@@ -85,15 +85,15 @@ export default class LinkedList<T> {
     }
 
     if (this.listSize === 1) {
-      this.first = null;
-      this.last = null;
+      this.head = null;
+      this.tail = null;
       this.listSize = 0;
     } else {
-      let previous = this.getPrevious(this.last);
+      let previous = this.getPrevious(this.tail);
 
       if (previous !== null) {
         previous.setNext = null;
-        this.last = previous;
+        this.tail = previous;
       }
 
       this.listSize--;
@@ -103,10 +103,10 @@ export default class LinkedList<T> {
   reverse() {
     if (this.listSize === 0) return;
 
-    let current = this.first;
-    let next = this.first?.getNext;
+    let current = this.head;
+    let next = this.head?.getNext;
 
-    if (this.first) this.first.setNext = null;
+    if (this.head) this.head.setNext = null;
 
     for (let i = 0; i < this.listSize; i++) {
       const nextRef = next?.getNext;
@@ -117,9 +117,9 @@ export default class LinkedList<T> {
       }
     }
 
-    const tempNode = this.first;
-    this.first = this.last;
-    this.last = tempNode;
+    const tempNode = this.head;
+    this.head = this.tail;
+    this.tail = tempNode;
   }
 
   getKthNodeFromEnd(k: number) {
@@ -131,14 +131,14 @@ export default class LinkedList<T> {
       throw new Error("Provided value is greater than list size");
     }
 
-    let pointer1 = this.first;
-    let pointer2 = this.first;
+    let pointer1 = this.head;
+    let pointer2 = this.head;
 
     for (let i = 0; i < k - 1; i++) {
       pointer2 = pointer2 ? pointer2.getNext : null;
     }
 
-    while (pointer2 !== this.last) {
+    while (pointer2 !== this.tail) {
       pointer1 = pointer1 ? pointer1.getNext : null;
       pointer2 = pointer2 ? pointer2.getNext : null;
     }
@@ -148,7 +148,7 @@ export default class LinkedList<T> {
 
   indexOf(value: T) {
     let index = 0;
-    let current = this.first;
+    let current = this.head;
 
     while (current !== null) {
       if (current.getValue === value) return index;
@@ -170,7 +170,7 @@ export default class LinkedList<T> {
   toArray() {
     const array: T[] = [];
 
-    let current = this.first;
+    let current = this.head;
 
     while (current !== null) {
       array.push(current.getValue);
@@ -181,7 +181,7 @@ export default class LinkedList<T> {
   }
 
   private getPrevious<T>(node: ListNode<T> | null) {
-    let current = this.first;
+    let current = this.head;
 
     while (current !== null) {
       if (current.getNext === node) return current;
@@ -191,7 +191,7 @@ export default class LinkedList<T> {
     return null;
   }
 
-  printAllNodes(node = this.first, i = 0) {
+  printAllNodes(node = this.head, i = 0) {
     console.log(i, ":", node);
     if (node?.getNext) {
       this.printAllNodes(node.getNext, ++i);
