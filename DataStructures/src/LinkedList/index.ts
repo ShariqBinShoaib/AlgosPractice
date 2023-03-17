@@ -36,6 +36,14 @@ export default class LinkedList<T> {
     this.listSize = 1;
   }
 
+  get getHead() {
+    return this.head;
+  }
+
+  get getTail() {
+    return this.tail;
+  }
+
   addLast(value: T) {
     const newNode = new ListNode(value);
 
@@ -144,6 +152,26 @@ export default class LinkedList<T> {
     }
 
     return pointer1;
+  }
+
+  printMiddle() {
+    let middleNode = this.head;
+    let pointer = this.head;
+
+    if (middleNode === null) throw new Error("List is empty");
+
+    while (pointer !== this.tail && pointer?.getNext !== this.tail) {
+      console.log("IN LOOP");
+      middleNode = middleNode ? middleNode.getNext : null;
+      pointer = pointer?.getNext?.getNext ? pointer.getNext.getNext : null;
+      console.log(pointer);
+    }
+
+    if (pointer === this.tail) {
+      console.log(`${middleNode?.getValue}`);
+    } else {
+      console.log(`${middleNode?.getValue}, ${middleNode?.getNext?.getValue}`);
+    }
   }
 
   indexOf(value: T) {

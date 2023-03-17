@@ -9,8 +9,8 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["jest", "supertest"]
   },
-  "include": ["src", "package.json"],
-  "exclude": ["src/**/*.test.ts"]
+  "include": ["src", "package.json"]
 }
