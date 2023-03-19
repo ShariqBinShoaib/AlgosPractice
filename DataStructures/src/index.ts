@@ -13,11 +13,11 @@ linkedList.addLast(4);
 // linkedList.reverse();
 
 // console.log("SIZE: ", linkedList.size());
-// console.log(linkedList.printAllNodes());
+console.log(linkedList.printAllNodes());
 // console.log(linkedList.toArray());
 
 // console.log(linkedList.getKthNodeFromEnd(1));
 
-linkedList.printMiddle();
+// linkedList.printMiddle();
 
-console.log(isExpressionBalanced(")((1 + (2 * 3))()"));
+console.log(isExpressionBalanced("(((a+b)-c)/(d+e))"));
